@@ -24,3 +24,88 @@ ENV["SLACK_WEB_HOOK"] = "https://hooks.slack.com/services/T2R7QBETE/B0123R6QXAB/
 ENV["SLACK_USER_NAME"] = "Wunder Build Machine"
 ENV["GENERAL_PROJECT_MESSAGE"] = "New test package of WBoilerplate is live!"
 ENV["EXCEPTION_PROJECT_MESSAGE"] = "Test package build exception!"
+
+platform :ios do
+  lane :beta do
+    sh "bundle install"
+    cocoapods(
+      podfile: ENV["POD_FILE_PATH"],
+      use_bundle_exec: "false",
+    )
+    update_code_signing_settings(
+      use_automatic_signing: true,
+      path: ENV["IOS_PROJ_PATH"],
+    )
+    gym(
+      scheme: ENV["IOS_SCHEME_NAME"],
+      clean: true,
+      workspace: ENV["IOS_WORKSPACE_PATH"],
+      export_method: "ad-hoc",
+      output_directory: ENV["IOS_BUILD_PATH"],
+      xcargs: "-allowProvisioningUpdates",
+      output_name: ENV["IOS_OUTPUT_NAME"],
+    )
+  end
+end
+
+platform :android do
+  lane :beta do
+    gradle(task: "clean", project_dir: ENV["ANDROID_PROJECT_PATH"])
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+      project_dir: ENV["ANDROID_PROJECT_PATH"],
+    )
+    sh "cp ../android/app/build/outputs/apk/release/app-release.apk ../builds/android/"
+  end
+end
+
+lane :firebase_result do
+  slack(
+    username: ENV["SLACK_USER_NAME"],
+    message: ENV["GENERAL_PROJECT_MESSAGE"],
+    success: true,
+    slack_url: ENV["SLACK_WEB_HOOK"],
+    default_payloads: [:last_git_commit],
+    attachment_properties: {
+      thumb_url: ENV["APP_ICON_URL"],
+      fields: [
+        {
+          title: "Build Date",
+          value: Time.new.to_s,
+          short: true,
+        },
+        {
+          title: "Build by",
+          value: "Fastlane",
+          short: true,
+        },
+        {
+          title: "Release Notes",
+          value: File.read("../release-notes.txt"),
+          short: false,
+        },
+      ],
+    },
+  )
+end
+
+error do |lane, exception|
+  slack(
+    username: ENV["EXCEPTION_PROJECT_MESSAGE"],
+    message: ENV["EXCEPTION_PROJECT_MESSAGE"],
+    success: false,
+    slack_url: ENV["SLACK_WEB_HOOK"],
+    default_payloads: [:lane],
+    attachment_properties: {
+      thumb_url: ENV["APP_ICON_URL"],
+      fields: [
+        {
+          title: "Exception",
+          value: exception,
+          short: true,
+        },
+      ],
+    },
+  )
+end

@@ -232,6 +232,7 @@ GEM
     ruby-macho (2.5.1)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    rufo (0.13.0)
     security (0.1.3)
     signet (0.17.0)
       addressable (~> 2.8)
@@ -279,6 +280,7 @@ PLATFORMS
 DEPENDENCIES
   cocoapods (~> 1.11, >= 1.11.2)
   fastlane
+  rufo
 
 RUBY VERSION
    ruby 3.0.0p0

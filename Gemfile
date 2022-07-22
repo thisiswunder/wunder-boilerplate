@@ -4,4 +4,5 @@ source 'https://rubygems.org'
 ruby '3.0.0'
 
 gem 'fastlane' 
+gem 'rufo' 
 gem 'cocoapods', '~> 1.11', '>= 1.11.2'
