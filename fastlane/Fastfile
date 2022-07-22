@@ -60,6 +60,10 @@ platform :android do
   end
 end
 
+lane :commit_push do
+  sh "yarn afterRelease"
+end
+
 lane :firebase_result do
   slack(
     username: ENV["SLACK_USER_NAME"],

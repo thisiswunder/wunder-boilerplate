@@ -12,7 +12,8 @@
     "precommit": "yarn format && yarn lint && git add .",
     "prepare": "husky install",
     "release": "standard-version",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "afterRelease": "export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git add -A && git commit -m 'build[skip ci]: '$PACKAGE_VERSION && git push https://github.com/thisiswunder/wunder-boilerplate.git --all --force && git push --tags"
   },
   "dependencies": {
     "react": "18.0.0",

@@ -1,0 +1,40 @@
+name: Wunder Boilerplate CI - Send To Firebase App Distribution
+on:
+  workflow_call:
+    
+jobs:
+  checkout-to-branch:
+    name: Checkout to branch
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+  setup-node-env:
+    name: Setup Node Env
+    runs-on: self-hosted
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 16.14.0
+          check-latest: true
+          registry-url: https://npm.pkg.github.com/
+
+  install-npm-packages:
+    name: Install Packages
+    runs-on: self-hosted
+    steps:
+      - name: yarn
+        run: yarn
+
+      - name: bundle install
+        run: bundle install
+
+  install-ruby-packages:
+    name: Install Packages
+    runs-on: self-hosted
+    steps:
+      - name: bundle install
+        run: bundle install
