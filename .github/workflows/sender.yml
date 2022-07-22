@@ -7,3 +7,15 @@ jobs:
   init-repo:
     name: Init Repo
     uses: ./.github/workflows/install-dependencies.yml
+  build-ios:
+    name: Buid iOS Binary
+    uses: ./.github/workflows/build-ios.yml
+    needs: [init-repo]
+  build-android:
+    name: Buid Android Binary
+    uses: ./.github/workflows/build-android.yml
+    needs: [init-repo, build-ios]
+  slack-notification:
+    name: Send Slack Notification
+    uses: ./.github/workflows/notify.yml
+    needs: [init-repo, build-ios, build-android]

@@ -1,0 +1,11 @@
+name: Wunder Boilerplate CI - Send To Firebase App Distribution
+on:
+  workflow_call:
+    
+jobs:
+  firebase_result:
+    name: Send Slack Notification
+    runs-on: self-hosted
+    steps:
+      - name: push aftermath residues
+        run: fastlane firebase_result

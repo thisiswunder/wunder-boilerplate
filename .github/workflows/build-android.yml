@@ -1,0 +1,11 @@
+name: Wunder Boilerplate CI - Send To Firebase App Distribution
+on:
+  workflow_call:
+    
+jobs:
+  build-android:
+    name: Buid Android Binary
+    runs-on: self-hosted
+    steps:
+      - name: Buid Android Binary
+        run: fastlane android beta
