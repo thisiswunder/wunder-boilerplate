@@ -27,7 +27,6 @@ ENV["EXCEPTION_PROJECT_MESSAGE"] = "Test package build exception!"
 
 platform :ios do
   lane :beta do
-    sh "bundle install"
     cocoapods(
       podfile: ENV["POD_FILE_PATH"],
       use_bundle_exec: "false",
