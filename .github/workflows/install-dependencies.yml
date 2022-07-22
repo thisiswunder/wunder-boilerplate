@@ -34,7 +34,7 @@ jobs:
     needs: [checkout-to-branch, setup-node-env]
 
   install-ruby-packages:
-    name: Install Packages
+    name: Install Ruby Packages
     runs-on: self-hosted
     steps:
       - name: bundle install
