@@ -4,5 +4,6 @@ on:
     branches: [test-release]
 
 jobs:
-  install-dependencies:
+  init-repo:
+    name: Init Repo
     uses: ./.github/workflows/install-dependencies.yml

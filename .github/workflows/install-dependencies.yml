@@ -22,6 +22,8 @@ jobs:
           check-latest: true
           registry-url: https://npm.pkg.github.com/
 
+    needs: [checkout-to-branch]
+
   install-npm-packages:
     name: Install Packages
     runs-on: self-hosted
@@ -29,8 +31,7 @@ jobs:
       - name: yarn
         run: yarn
 
-      - name: bundle install
-        run: bundle install
+    needs: [checkout-to-branch, setup-node-env]
 
   install-ruby-packages:
     name: Install Packages
@@ -38,3 +39,5 @@ jobs:
     steps:
       - name: bundle install
         run: bundle install
+    
+    needs: [checkout-to-branch, setup-node-env, install-npm-packages]
