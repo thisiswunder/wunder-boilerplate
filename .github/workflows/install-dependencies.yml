@@ -50,6 +50,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: bundle install
+        run: rvm use ruby-3.0.0
+      - name: bundle install
         run: bundle install
     
     needs: [checkout-to-branch, setup-node-env, install-npm-packages]
