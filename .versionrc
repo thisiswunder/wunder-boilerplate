@@ -40,5 +40,8 @@
   "userUrlFormat": "{{host}}/{{user}}",
   "issuePrefixes": [
     "#"
-  ]
+  ],
+  "scripts": {
+    "postchangelog": "node scripts/parseChangeLog.js"
+  }
 }
