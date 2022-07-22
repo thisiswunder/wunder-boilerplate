@@ -35,6 +35,7 @@
     "metro-react-native-babel-preset": "^0.70.3",
     "prettier": "^2.7.1",
     "react-test-renderer": "18.0.0",
+    "standard-version": "^9.5.0",
     "typescript": "^4.4.4"
   },
   "jest": {

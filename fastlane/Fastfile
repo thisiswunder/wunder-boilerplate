@@ -1,0 +1,26 @@
+ENV["RELEASE_NOTES_PATH"] = "./release-notes.txt"
+ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "180"
+ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "180"
+ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "10"
+
+# iOS Paths
+ENV["IOS_BUILD_PATH"] = "./builds/ios"
+ENV["IPA_PATH"] = "./builds/ios/WBoilerplate.ipa"
+ENV["POD_FILE_PATH"] = "./ios/Podfile"
+ENV["IOS_PROJ_PATH"] = "./ios/WBoilerplate.xcodeproj"
+ENV["IOS_WORKSPACE_PATH"] = "./ios/WBoilerplate.xcworkspace"
+ENV["IOS_SCHEME_NAME"] = "WBoilerplate"
+ENV["IOS_OUTPUT_NAME"] = "WBoilerplate.ipa"
+
+# Android Paths
+ENV["ANDROID_PROJECT_PATH"] = "android/"
+ENV["ANDROID_BUILD_PATH"] = "./builds/android"
+ENV["APK_PATH"] = "./builds/android/app-release.apk"
+ENV["AAB_PATH"] = "./builds/android/app-release.aab"
+
+# Slack configs
+ENV["SLACK_WEB_HOOK"] = "https://hooks.slack.com/services/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"
+# ENV["APP_ICON_URL"] = "https://firebasestorage.googleapis.com/v0/b/sigortam-cepte-v2.appspot.com/o/app-icon%2Ficon.png?alt=media&token=8709cab0-0bc4-48ac-b585-851bee325d04"
+ENV["SLACK_USER_NAME"] = "Wunder Build Machine"
+ENV["GENERAL_PROJECT_MESSAGE"] = "New test package of WBoilerplate is live!"
+ENV["EXCEPTION_PROJECT_MESSAGE"] = "Test package build exception!"

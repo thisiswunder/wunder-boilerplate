@@ -19,6 +19,7 @@ xcuserdata
 DerivedData
 *.hmap
 *.ipa
+*.dSYM.zip
 *.xcuserstate
 ios/.xcode.env.local
 
@@ -30,6 +31,8 @@ build/
 local.properties
 *.iml
 *.hprof
+*.apk
+*.aab
 
 # node.js
 #
