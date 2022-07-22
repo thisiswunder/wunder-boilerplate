@@ -39,11 +39,9 @@ jobs:
   setup-ruby-env:
     name: Setup Ruby Env
     runs-on: self-hosted
-
+    env:
+      ImageOS: macos1015
     steps:
-      - name: export ImageOS
-        run: export ImageOS=macos1015
-
       - name: Setup Ruby environment
         uses: ruby/setup-ruby@v1
         with:
