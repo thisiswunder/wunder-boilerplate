@@ -36,20 +36,6 @@ jobs:
 
     needs: [checkout-to-branch]
 
-  setup-ruby-env:
-    name: Setup Ruby Env
-    runs-on: self-hosted
-    env:
-      ImageOS: macos1015
-    steps:
-      - name: Setup Ruby environment
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-
-    needs: [checkout-to-branch, setup-node-env]
-
   install-npm-packages:
     name: Install Packages
     runs-on: self-hosted
@@ -57,7 +43,7 @@ jobs:
       - name: yarn
         run: yarn
 
-    needs: [checkout-to-branch, setup-node-env, setup-ruby-env]
+    needs: [checkout-to-branch, setup-node-env]
 
   install-ruby-packages:
     name: Install Ruby Packages
@@ -66,4 +52,4 @@ jobs:
       - name: bundle install
         run: bundle install
     
-    needs: [checkout-to-branch, setup-node-env, setup-ruby-env, install-npm-packages]
+    needs: [checkout-to-branch, setup-node-env, install-npm-packages]
