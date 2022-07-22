@@ -5,8 +5,16 @@ on:
 jobs:
   build-ios:
     name: Buid iOS Binary
-    uses: ./.github/workflows/build-ios.yml
+    runs-on: self-hosted
+    steps:
+      - name: Buid iOS Binary
+        run: fastlane ios beta
+  
   build-android:
     name: Buid Android Binary
-    uses: ./.github/workflows/build-android.yml
+    runs-on: self-hosted
+    steps:
+      - name: Buid Android Binary
+        run: fastlane android beta
+    
     needs: [build-ios]
