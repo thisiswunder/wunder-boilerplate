@@ -1,4 +1,4 @@
-package com.rnwunderboilerplate.newarchitecture.components;
+package is.wunder.boilerplate.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

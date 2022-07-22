@@ -1,4 +1,4 @@
-package com.rnwunderboilerplate.newarchitecture.modules;
+package is.wunder.boilerplate.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

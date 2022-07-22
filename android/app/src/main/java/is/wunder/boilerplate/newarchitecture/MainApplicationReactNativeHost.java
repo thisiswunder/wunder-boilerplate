@@ -1,4 +1,4 @@
-package com.rnwunderboilerplate.newarchitecture;
+package is.wunder.boilerplate.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.rnwunderboilerplate.BuildConfig;
-import com.rnwunderboilerplate.newarchitecture.components.MainComponentsRegistry;
-import com.rnwunderboilerplate.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import is.wunder.boilerplate.BuildConfig;
+import is.wunder.boilerplate.newarchitecture.components.MainComponentsRegistry;
+import is.wunder.boilerplate.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.rnwunderboilerplate;
+package is.wunder.boilerplate;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "RNWunderBoilerPlate";
+    return "WBoilerplate";
   }
 
   /**
