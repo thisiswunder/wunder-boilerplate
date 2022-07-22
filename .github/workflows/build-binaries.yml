@@ -1,0 +1,12 @@
+name: Wunder Boilerplate CI - Send To Firebase App Distribution
+on:
+  workflow_call:
+
+jobs:
+  build-ios:
+    name: Buid iOS Binary
+    uses: ./.github/workflows/build-ios.yml
+  build-android:
+    name: Buid Android Binary
+    uses: ./.github/workflows/build-android.yml
+    needs: [build-ios]
