@@ -1,0 +1,7 @@
+ 🚿 Chore
+
+* app rename
+* changelog parser added
+* husky init
+* init project
+* standard version init

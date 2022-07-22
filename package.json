@@ -1,6 +1,6 @@
 {
   "name": "WBoilerplate",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -10,7 +10,9 @@
     "lint": "eslint '*/**/*.{ts,tsx}' --quiet --fix",
     "format": "prettier --write './**/*.{ts,tsx,js,jsx}' --config ./.prettierrc",
     "precommit": "yarn format && yarn lint && git add .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "standard-version",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "react": "18.0.0",
@@ -34,6 +36,7 @@
     "husky": "^8.0.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.70.3",
+    "patch-package": "^6.4.7",
     "prettier": "^2.7.1",
     "react-test-renderer": "18.0.0",
     "standard-version": "^9.5.0",
