@@ -38,14 +38,29 @@ jobs:
     name: Install Packages
     runs-on: self-hosted
     steps:
-      - name: yarn
-        run: yarn
+      - name: Cache node modules
+        uses: actions/cache@master
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: yarn-${{ hashFiles('yarn.lock') }}
+
+      - name: Install node modules if cache not present
+        run: yarn install --immutable
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
 
   install-ruby-packages:
     name: Install Ruby Packages
     runs-on: self-hosted
     steps:
-      - name: bundle install
-        run: rvm use ruby-3.0.0
+      - name: Gem caching
+        uses: actions/cache@master
+        continue-on-error: true
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+            
       - name: bundle install
         run: bundle install

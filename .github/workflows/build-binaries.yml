@@ -16,5 +16,3 @@ jobs:
     steps:
       - name: Buid Android Binary
         run: fastlane android beta
-    
-    needs: [build-ios]
