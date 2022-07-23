@@ -11,6 +11,8 @@ ENV["IOS_PROJ_PATH"] = "./ios/WBoilerplate.xcodeproj"
 ENV["IOS_WORKSPACE_PATH"] = "./ios/WBoilerplate.xcworkspace"
 ENV["IOS_SCHEME_NAME"] = "WBoilerplate"
 ENV["IOS_OUTPUT_NAME"] = "WBoilerplate.ipa"
+ENV["IOS_BUILD_CONFIGURATION"] = "Release"
+ENV["IOS_DERIVED_DATA_PATH"] = "./ios/DerivedData"
 
 # Android Paths
 ENV["ANDROID_PROJECT_PATH"] = "android/"
@@ -27,6 +29,8 @@ ENV["EXCEPTION_PROJECT_MESSAGE"] = "Test package build exception!"
 
 platform :ios do
   lane :beta do
+    ios_derived_data_path = File.expand_path(ENV["IOS_DERIVED_DATA_PATH"])
+    cache_folder = File.expand_path("#{ios_derived_data_path}/Build/Intermediates.noindex/ArchiveIntermediates/#{ENV["IOS_SCHEME_NAME"]}/BuildProductsPath/#{ENV["IOS_BUILD_CONFIGURATION"]}-iphoneos")
     cocoapods(
       podfile: ENV["POD_FILE_PATH"],
       use_bundle_exec: "false",
@@ -35,15 +39,59 @@ platform :ios do
       use_automatic_signing: true,
       path: ENV["IOS_PROJ_PATH"],
     )
-    gym(
-      scheme: ENV["IOS_SCHEME_NAME"],
-      clean: true,
-      workspace: ENV["IOS_WORKSPACE_PATH"],
-      export_method: "ad-hoc",
-      output_directory: ENV["IOS_BUILD_PATH"],
-      xcargs: "-allowProvisioningUpdates",
-      output_name: ENV["IOS_OUTPUT_NAME"],
-    )
+
+    if (File.exist?(cache_folder))
+      fastlane_require "xcodeproj"
+      project = Xcodeproj::Project.open(ENV["IOS_PROJ_PATH"])
+      target = project.targets.select { |target| target.name == ENV["IOS_SCHEME_NAME"] }.first
+      phase = target.shell_script_build_phases.select { |phase| phase.name && phase.name.include?("Copy Pods Resources") }.first
+      if (!phase.shell_script.start_with?("BUILT_PRODUCTS_DIR"))
+        phase.shell_script = "BUILT_PRODUCTS_DIR=#{cache_folder} #{phase.shell_script}"
+        project.save()
+      end
+      gym(
+        scheme: ENV["IOS_SCHEME_NAME"],
+        clean: false,
+        project: ENV["IOS_PROJ_PATH"],
+        export_method: "ad-hoc",
+        output_directory: ENV["IOS_BUILD_PATH"],
+        xcargs: "-allowProvisioningUpdates",
+        output_name: ENV["IOS_OUTPUT_NAME"],
+        export_options: {
+          compileBitcode: false,
+          uploadBitcode: false,
+          uploadSymbols: false,
+        },
+        xcargs: [
+          "PODS_CONFIGURATION_BUILD_DIR=#{cache_folder}",
+          "FRAMEWORK_SEARCH_PATHS='#{cache_folder} $(inherited)'",
+          "LIBRARY_SEARCH_PATHS='#{cache_folder} $(inherited)'",
+          "SWIFT_INCLUDE_PATHS=#{cache_folder}",
+        ].join(" "),
+      )
+    else
+      gym(
+        scheme: ENV["IOS_SCHEME_NAME"],
+        clean: true,
+        workspace: ENV["IOS_WORKSPACE_PATH"],
+        export_method: "ad-hoc",
+        output_directory: ENV["IOS_BUILD_PATH"],
+        xcargs: "-allowProvisioningUpdates",
+        output_name: ENV["IOS_OUTPUT_NAME"],
+      )
+      require "fileutils"
+      dirs = [
+        File.expand_path("#{ios_derived_data_path}/info.plist"),
+        File.expand_path("#{ios_derived_data_path}/Logs"),
+        File.expand_path("#{ios_derived_data_path}/SourcePackages"),
+        File.expand_path("#{ios_derived_data_path}/ModuleCache.noindex"),
+        File.expand_path("#{ios_derived_data_path}/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/MyApp.build"),
+        File.expand_path("#{ios_derived_data_path}/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/XCBuildData"),
+        File.expand_path("#{ios_derived_data_path}/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/BuildProductsPath/SwiftSupport"),
+        File.expand_path("#{ios_derived_data_path}/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/PrecompiledHeaders"),
+      ]
+      dirs.each { |dir| FileUtils.rm_rf(dir) }
+    end
   end
 end
 
