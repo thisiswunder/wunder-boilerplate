@@ -97,11 +97,11 @@ end
 
 platform :android do
   lane :beta do
-    gradle(task: "clean", project_dir: ENV["ANDROID_PROJECT_PATH"])
     gradle(
       task: "assemble",
       build_type: "Release",
       project_dir: ENV["ANDROID_PROJECT_PATH"],
+      flags: "--build-cache",
     )
     create_builds
     create_dir
