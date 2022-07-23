@@ -4,12 +4,13 @@ on:
     branches: [test-release]
 
 jobs:
-  # init-repo:
-  #   name: Init Repo
-  #   uses: ./.github/workflows/install-dependencies.yml
-  build-binaries:
-    name: Buid iOS Binary
-    uses: ./.github/workflows/build-binaries.yml
+  init-repo:
+    name: Init Repo
+    uses: ./.github/workflows/install-dependencies.yml
+  # build-binaries:
+  #   name: Buid iOS Binary
+  #   uses: ./.github/workflows/build-binaries.yml
+  #   needs: [init-repo]
   # slack-notification:
   #   name: Send Slack Notification
   #   uses: ./.github/workflows/notify.yml

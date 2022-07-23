@@ -17,6 +17,7 @@ jobs:
   setup-node-env:
     name: Setup Node Env
     runs-on: self-hosted
+    needs: [checkout-to-branch]
     steps:
       - run: |
           echo "Sleeping for 10"
@@ -31,6 +32,7 @@ jobs:
   install-npm-packages:
     name: Install Packages
     runs-on: self-hosted
+    needs: [setup-node-env]
     steps:
       - run: |
           echo "Sleeping for 10"
@@ -49,6 +51,7 @@ jobs:
   install-ruby-packages:
     name: Install Ruby Packages
     runs-on: self-hosted
+    needs: [setup-node-env]
     steps:
       - run: |
           echo "Sleeping for 10"
