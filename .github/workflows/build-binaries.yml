@@ -7,12 +7,18 @@ jobs:
     name: Buid iOS Binary
     runs-on: self-hosted
     steps:
-      - name: Buid iOS Binary
-        run: fastlane ios beta
+      - run: |
+          echo "Sleeping for 10"
+          sleep 10
+      # - name: Buid iOS Binary
+      #   run: fastlane ios beta
   
   build-android:
     name: Buid Android Binary
     runs-on: self-hosted
     steps:
-      - name: Buid Android Binary
-        run: fastlane android beta
+      - run: |
+          echo "Sleeping for 10"
+          sleep 10
+      # - name: Buid Android Binary
+      #   run: fastlane android beta

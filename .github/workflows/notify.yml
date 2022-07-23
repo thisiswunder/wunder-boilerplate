@@ -7,5 +7,8 @@ jobs:
     name: Send Slack Notification
     runs-on: self-hosted
     steps:
-      - name: push aftermath residues
-        run: fastlane firebase_result
+      - run: |
+          echo "Sleeping for 10"
+          sleep 10
+      # - name: push aftermath residues
+      #   run: fastlane firebase_result
