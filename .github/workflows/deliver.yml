@@ -3,7 +3,7 @@ on:
   workflow_call:
 
 jobs:
-  build-ios:
+  send-ios:
     name: Send iOS Package
     runs-on: self-hosted
     steps:
@@ -11,7 +11,7 @@ jobs:
           echo "Sleeping for 10"
           sleep 10
   
-  build-android:
+  send-android:
     name: Send Android Package
     runs-on: self-hosted
     steps:
