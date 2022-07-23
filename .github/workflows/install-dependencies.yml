@@ -10,18 +10,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      
-      - name: export LC_ALL
-        run: export LC_ALL=en_US.UTF-8
-
-      - name: export LANG
-        run: export LANG=en_US.UTF-8
-
-      - name: export LC_ALL
-        run: export LC_ALL=en_US.UTF-8
-
-      - name: export LANG
-        run: export LANG=en_US.UTF-8
 
   setup-node-env:
     name: Setup Node Env
