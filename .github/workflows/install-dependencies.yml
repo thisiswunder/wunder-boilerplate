@@ -37,12 +37,16 @@ jobs:
       # - run: |
       #     echo "Sleeping for 10"
       #     sleep 10
+      - name: Find yarn cache
+        id: yarn-cache-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
       - name: Cache node modules
-        uses: actions/cache@master
-        id: cache-node-modules
+        uses: actions/cache@v2
         with:
-          path: node_modules
-          key: yarn-${{ hashFiles('yarn.lock') }}
+          path: ${{ steps.yarn-cache-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
 
       - name: Install node modules if cache not present
         run: yarn install --immutable
@@ -57,7 +61,7 @@ jobs:
       #     echo "Sleeping for 10"
       #     sleep 10
       - name: Gem caching
-        uses: actions/cache@master
+        uses: actions/cache@v2
         continue-on-error: true
         with:
           path: vendor/bundle
