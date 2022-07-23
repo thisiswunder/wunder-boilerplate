@@ -1,6 +1,6 @@
 name: Wunder Boilerplate CI - Send To Firebase App Distribution
 on:
-  push:
+  pull-request:
     branches: [test-release]
 
 jobs:
