@@ -10,6 +10,12 @@ jobs:
       # - run: |
       #     echo "Sleeping for 10"
       #     sleep 10
+      - name: Cache iOS Derived Data
+        uses: actions/cache@master
+        with:
+          path: ./ios/DerivedData/
+          key: ${{ runner.os }}-pods-derived-data-${{ hashFiles('**/Podfile.lock') }}
+
       - name: Buid iOS Binary
         run: fastlane ios beta
   
@@ -20,5 +26,18 @@ jobs:
       # - run: |
       #     echo "Sleeping for 10"
       #     sleep 10
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@master
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@master
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
       - name: Buid Android Binary
         run: fastlane android beta
