@@ -51,7 +51,7 @@ jobs:
   install-ruby-packages:
     name: Install Ruby Packages
     runs-on: self-hosted
-    needs: [setup-node-env]
+    needs: [install-npm-packages, setup-node-env]
     steps:
       # - run: |
       #     echo "Sleeping for 10"
