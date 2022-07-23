@@ -1,16 +1,33 @@
 module.exports = {
   root: true,
-  extends: '@react-native-community',
+  extends: ['@react-native-community', 'react-native-wcandillon'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'reanimated'],
+  parserOptions: {
+    project: './tsconfig.json',
+    tsconfigRootDir: './',
+  },
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
       rules: {
-        '@typescript-eslint/no-shadow': ['error'],
-        'no-shadow': 'off',
-        'no-undef': 'off',
+        'react-hooks/exhaustive-deps': 'off',
+        '@typescript-eslint/no-unused-vars': 'warn',
+        'prettier/prettier': [
+          'error',
+          {},
+          {
+            arrowParens: 'avoid',
+            bracketSameLine: true,
+            bracketSpacing: false,
+            singleQuote: true,
+            trailingComma: 'all',
+          },
+        ],
       },
     },
   ],
+  rules: {
+    'reanimated/js-function-in-worklet': 2,
+  },
 };
