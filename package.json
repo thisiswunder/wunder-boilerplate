@@ -3,6 +3,7 @@
   "version": "0.0.3",
   "private": true,
   "scripts": {
+    "typescript": "tsc --noEmit",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
