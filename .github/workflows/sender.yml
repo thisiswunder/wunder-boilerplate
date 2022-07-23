@@ -14,8 +14,8 @@ jobs:
   send-binaries:
     name: Buid iOS Binary
     uses: ./.github/workflows/deliver.yml
-    needs: [build-binaries, init-repo]
+    needs: [init-repo, build-binaries]
   slack-notification:
     name: Send Slack Notification
     uses: ./.github/workflows/notify.yml
-    needs: [build-binaries, init-repo, build-binaries]
+    needs: [init-repo, build-binaries, send-binaries]
