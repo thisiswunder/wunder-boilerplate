@@ -55,7 +55,25 @@ platform :android do
       build_type: "Release",
       project_dir: ENV["ANDROID_PROJECT_PATH"],
     )
+    create_builds
+    create_dir
     sh "cp ../android/app/build/outputs/apk/release/app-release.apk ../builds/android/"
+  end
+end
+
+lane :create_builds do
+  begin
+    sh "mkdir ../builds"
+  rescue => ex
+    UI.error(ex)
+  end
+end
+
+lane :create_dir do
+  begin
+    sh "mkdir ../builds/android"
+  rescue => ex
+    UI.error(ex)
   end
 end
 
