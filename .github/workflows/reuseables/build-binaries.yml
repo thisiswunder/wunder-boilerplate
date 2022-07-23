@@ -11,7 +11,7 @@ jobs:
       #     echo "Sleeping for 10"
       #     sleep 10
       - name: Restore Pods cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             example/ios/Pods
@@ -35,7 +35,7 @@ jobs:
       #     echo "Sleeping for 10"
       #     sleep 10
       - name: Restore Gradle cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
