@@ -7,48 +7,60 @@ jobs:
     name: Checkout to branch
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - run: |
+          echo "Sleeping for 10"
+          sleep 10
+      # - uses: actions/checkout@v2
+      #   with:
+      #     fetch-depth: 0
 
   setup-node-env:
     name: Setup Node Env
     runs-on: self-hosted
     steps:
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.4
-        with:
-          node-version: 16.14.0
-          check-latest: true
-          registry-url: https://npm.pkg.github.com/
+      - run: |
+          echo "Sleeping for 10"
+          sleep 10
+      # - name: Setup Node.js environment
+      #   uses: actions/setup-node@v2.1.4
+      #   with:
+      #     node-version: 16.14.0
+      #     check-latest: true
+      #     registry-url: https://npm.pkg.github.com/
 
   install-npm-packages:
     name: Install Packages
     runs-on: self-hosted
     steps:
-      - name: Cache node modules
-        uses: actions/cache@master
-        id: cache-node-modules
-        with:
-          path: node_modules
-          key: yarn-${{ hashFiles('yarn.lock') }}
+      - run: |
+          echo "Sleeping for 10"
+          sleep 10
+      # - name: Cache node modules
+      #   uses: actions/cache@master
+      #   id: cache-node-modules
+      #   with:
+      #     path: node_modules
+      #     key: yarn-${{ hashFiles('yarn.lock') }}
 
-      - name: Install node modules if cache not present
-        run: yarn install --immutable
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      # - name: Install node modules if cache not present
+      #   run: yarn install --immutable
+      #   if: steps.cache-node-modules.outputs.cache-hit != 'true'
 
   install-ruby-packages:
     name: Install Ruby Packages
     runs-on: self-hosted
     steps:
-      - name: Gem caching
-        uses: actions/cache@master
-        continue-on-error: true
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
+      - run: |
+          echo "Sleeping for 10"
+          sleep 10
+      # - name: Gem caching
+      #   uses: actions/cache@master
+      #   continue-on-error: true
+      #   with:
+      #     path: vendor/bundle
+      #     key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-gems-
             
-      - name: bundle install
-        run: bundle install
+      # - name: bundle install
+      #   run: bundle install

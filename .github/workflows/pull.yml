@@ -6,9 +6,11 @@ on:
 jobs:
   init-repo:
     uses: ./.github/workflows/install-dependencies.yml
-  build-binaries:
-    uses: ./.github/workflows/build-binaries.yml
-    needs: [init-repo]
-  slack-notification:
-    uses: ./.github/workflows/notify.yml
-    needs: [init-repo, build-binaries]
+  # build-binaries:
+  #   name: Buid iOS Binary
+  #   uses: ./.github/workflows/build-binaries.yml
+  #   needs: [init-repo]
+  # slack-notification:
+  #   name: Send Slack Notification
+  #   uses: ./.github/workflows/notify.yml
+  #   needs: [init-repo, build-binaries]
