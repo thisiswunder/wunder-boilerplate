@@ -6,16 +6,16 @@ on:
 jobs:
   init-repo:
     name: Init Repo
-    uses: ./.github/workflows/reuseables/install-dependencies.yml
+    uses: ./.github/workflows/install-dependencies.yml
   build-binaries:
     name: Build Binaries
-    uses: ./.github/workflows/reuseables/build-binaries.yml
+    uses: ./.github/workflows/build-binaries.yml
     needs: [init-repo]
   send-binaries:
     name: Send Binaries
-    uses: ./.github/workflows/reuseables/deliver.yml
+    uses: ./.github/workflows/deliver.yml
     needs: [init-repo, build-binaries]
   slack-notification:
     name: Send Slack Notification
-    uses: ./.github/workflows/reuseables/notify.yml
+    uses: ./.github/workflows/notify.yml
     needs: [init-repo, build-binaries, send-binaries]

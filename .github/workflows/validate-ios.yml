@@ -10,7 +10,6 @@ on:
   pull_request:
     branches:
       - test-release
-      - main
     paths:
       - '.github/workflows/validate-ios.yml'
       - 'ios/**'
