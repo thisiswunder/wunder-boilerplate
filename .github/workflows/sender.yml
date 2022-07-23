@@ -8,7 +8,7 @@ jobs:
     name: Init Repo
     uses: ./.github/workflows/install-dependencies.yml
   build-binaries:
-    name: Buid Binaries
+    name: Build Binaries
     uses: ./.github/workflows/build-binaries.yml
     needs: [init-repo]
   send-binaries:
