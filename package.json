@@ -1,6 +1,6 @@
 {
   "name": "@thisiswunder/wunder-boilerplate",
-  "version": "1.1.9",
+  "version": "1.1.8",
   "main": "node_modules/expo/AppEntry.js",
   "license": "MIT",
   "publishConfig": {
@@ -62,5 +62,29 @@
     "eslint-plugin-prettier": "^5.0.0-alpha.2",
     "husky": "^8.0.0",
     "prettier": "^3.0.0"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "${version}",
+      "requireBranch": "master",
+      "addUntrackedFiles": true,
+      "requireCleanWorkingDir": false
+    },
+    "npm": {
+      "publish": false
+    },
+    "github": {
+      "release": true,
+      "skipChecks": true,
+      "assets": [
+        "dist/release.tgz"
+      ]
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "angular"
+      }
+    }
   }
 }
