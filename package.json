@@ -3,6 +3,9 @@
   "version": "1.1.5",
   "main": "node_modules/expo/AppEntry.js",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  },
   "scripts": {
     "lint": "eslint '*/**/*.{ts,tsx}' --fix",
     "format": "prettier --write './**/*.{ts,tsx}' --config ./.prettierrc",
