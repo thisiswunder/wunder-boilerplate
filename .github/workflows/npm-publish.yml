@@ -22,34 +22,5 @@ jobs:
       - name: Install Yarn
         run: npm install -g yarn
       - run: yarn
-
-  create-release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: create release
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.TOKEN}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: npm run release-it
-    needs: [install-dependencies]
-
-  publish-release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: publish release
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.TOKEN}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: npm publish
-    needs: [install-dependencies, create-release]
-
-  cleanup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Uninstall Yarn
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.TOKEN}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        if: always()
-        run: npm uninstall -g yarn
-    needs: [install-dependencies, create-release, publish-release]
+      - run: yarn release-it
+      - run: npm publish
