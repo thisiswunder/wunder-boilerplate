@@ -1,0 +1,55 @@
+name: CI - npm release
+on:
+  push:
+    branches: [master]
+
+jobs:
+  install-dependencies:
+    runs-on: ubuntu-latest
+    if: "! contains(github.event.head_commit.message, 'chore: release')"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 16.15.1
+          check-latest: true
+          registry-url: https://npm.pkg.github.com/
+          scope: '@thisiswunder'
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Install Yarn
+        run: npm install -g yarn
+      - run: yarn
+
+  create-release:
+    runs-on: self-hosted
+    steps:
+      - name: create release
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: npm run release-it
+    needs: [install-dependencies]
+
+  publish-release:
+    runs-on: self-hosted
+    steps:
+      - name: publish release
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: npm publish
+    needs: [install-dependencies, create-release]
+
+  cleanup:
+    runs-on: self-hosted
+    steps:
+      - name: Uninstall Yarn
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        if: always()
+        run: npm uninstall -g yarn
+    needs: [install-dependencies, create-release, publish-release]
