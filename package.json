@@ -1,0 +1,80 @@
+{
+  "name": "@thisiswunder/wunder-boilerplate",
+  "version": "1.1.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "lint": "eslint '*/**/*.{ts,tsx}' --fix",
+    "format": "prettier --write './**/*.{ts,tsx}' --config ./.prettierrc",
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "prepare": "husky install",
+    "precommit": "yarn format && yarn lint && git add ."
+  },
+  "dependencies": {
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/native-stack": "^6.9.13",
+    "@react-navigation/stack": "^6.3.17",
+    "@release-it/conventional-changelog": "^7.0.0",
+    "@tamagui/babel-plugin": "^1.39.3",
+    "@tamagui/config": "^1.39.3",
+    "@tamagui/shorthands": "^1.39.3",
+    "@tamagui/themes": "^1.39.3",
+    "@types/react": "~18.2.14",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.4",
+    "expo": "~49.0.0",
+    "expo-font": "~11.4.0",
+    "expo-splash-screen": "~0.20.4",
+    "expo-status-bar": "~1.6.0",
+    "react": "18.2.0",
+    "react-native": "0.72.1",
+    "react-native-gesture-handler": "~2.12.0",
+    "react-native-reanimated": "~3.3.0",
+    "react-native-safe-area-context": "4.6.3",
+    "react-native-screens": "~3.22.0",
+    "release-it": "^16.1.0",
+    "tamagui": "^1.39.3",
+    "typescript": "^5.1.3",
+    "zustand": "^4.3.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-universe": "^11.3.0",
+    "eslint-plugin-prettier": "^5.0.0-alpha.2",
+    "husky": "^8.0.0",
+    "prettier": "^3.0.0"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "${version}",
+      "requireBranch": "master",
+      "addUntrackedFiles": true,
+      "requireCleanWorkingDir": false
+    },
+    "npm": {
+      "publish": false
+    },
+    "github": {
+      "release": true,
+      "skipChecks": true,
+      "assets": [
+        "dist/release.tgz"
+      ]
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "angular"
+      }
+    }
+  }
+}
