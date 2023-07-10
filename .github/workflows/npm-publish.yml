@@ -21,6 +21,8 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Install Yarn
         run: npm install -g yarn
+      - run: git config user.email "${{secrets.GIT_CONFIG_EMAIL}}"
+      - run: git config user.name "${{secrets.GIT_CONFIG_DEV_NAME}}"
       - run: yarn
       - run: yarn release-it
       - run: npm publish
