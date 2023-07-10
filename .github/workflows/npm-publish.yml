@@ -24,7 +24,7 @@ jobs:
       - run: yarn
 
   create-release:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: create release
         env:
@@ -34,7 +34,7 @@ jobs:
     needs: [install-dependencies]
 
   publish-release:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: publish release
         env:
@@ -44,7 +44,7 @@ jobs:
     needs: [install-dependencies, create-release]
 
   cleanup:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Uninstall Yarn
         env:
