@@ -4,7 +4,7 @@ on:
     branches: [master]
 
 jobs:
-  install-dependencies:
+  release-it:
     runs-on: ubuntu-latest
     if: "! contains(github.event.head_commit.message, 'chore: release')"
     steps:
@@ -19,9 +19,15 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.TOKEN}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Install Yarn
+
+      - name: Install Yarn to global
         run: npm install -g yarn
-      - run: git config user.email "${{secrets.GIT_CONFIG_EMAIL}}"
-      - run: git config user.name "${{secrets.GIT_CONFIG_DEV_NAME}}"
-      - run: yarn
-      - run: yarn release-it
+
+      - name: Add email & name to git config
+        run: git config user.email "${{secrets.GIT_CONFIG_EMAIL}}" && git config user.name "${{secrets.GIT_CONFIG_DEV_NAME}}"
+
+      - name: Install packages
+        run: yarn
+
+      - name: Create release
+        run: GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} yarn release-it
