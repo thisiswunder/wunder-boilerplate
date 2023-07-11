@@ -15,16 +15,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "is.wunder.boilerplate"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "is.wunder.boilerplate"
     },
     "experiments": {
       "tsconfigPaths": true
-    }
+    },
+    "plugins": [
+      "expo-localization"
+    ]
   }
 }
