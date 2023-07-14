@@ -1,9 +1,9 @@
 import { View } from 'react-native';
 import Animated, {
+  Easing,
+  useAnimatedStyle,
   useSharedValue,
   withTiming,
-  useAnimatedStyle,
-  Easing,
 } from 'react-native-reanimated';
 import { Button } from 'tamagui';
 

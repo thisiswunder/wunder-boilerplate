@@ -1,7 +1,7 @@
 import { config } from '@tamagui/config';
+import { createTamagui, setupReactNative } from '@tamagui/core'; // or '@tamagui/core'
 import { createInterFont } from '@tamagui/font-inter';
 import { Text, View } from 'react-native';
-import { createTamagui, setupReactNative, createFont } from '@tamagui/core'; // or '@tamagui/core'
 // if using only @tamagui/core with `react-native` components
 // if using `tamagui` this isn't necessary as it does this setup for you (for most components)
 setupReactNative({
