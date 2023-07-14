@@ -1,6 +1,6 @@
 {
   "name": "@thisiswunder/wunder-boilerplate",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "node_modules/expo/AppEntry.js",
   "license": "MIT",
   "publishConfig": {
