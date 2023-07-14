@@ -22,7 +22,7 @@ yarn prebuild
 - [Reanimated 3](https://github.com/software-mansion/react-native-reanimated) - React Native's Animated library reimplemented.
 - [Zustand](https://github.com/pmndrs/zustand) - A small, fast and scalable bearbones state-management solution using simplified flux principles. Has a comfy API based on hooks, isn't boilerplatey or opinionated.
 - [React Native Gesture Handler](https://github.com/kmagiera/react-native-gesture-handler) - native touches and gesture system for React Native.
-- [Generate React CLI](https://github.com/kmagiera/react-native-gesture-handler) - native touches and gesture system for React Native.
+- [Generate React CLI](https://github.com/arminbro/generate-react-cli) - To help speed up productivity in React projects and stop copying, pasting, and renaming files each time you want to create a new component.
 
 ## Usefull commands
 
